@@ -8,22 +8,29 @@ import { Subject } from 'rxjs';
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
-    new Recipe(
-      'Tuna Tartare',
-      'A simple and healthy tuna tartare recipe that will be sure to impress anyone!',
-      'https://choosingchia.com/jessh-jessh/uploads/2015/03/tunatarare.jpg',
-      [new Ingredient('Tuna', 1), new Ingredient('Avocado', 2)]
-    ),
-    new Recipe(
-      'Beef Steak',
-      'This grilled steak is flavorful, juicy, and tender. You won’t believe it’s not from an upscale',
-      'https://foremangrillrecipes.com/wp-content/uploads/2013/06/featured-Foreman-Grill-Beef-Steak.jpg',
-      [new Ingredient('Beef', 1), new Ingredient('French Fries', 25)]
-    )
-  ];
+  // private recipes: Recipe[] = [
+  //   new Recipe(
+  //     'Tuna Tartare',
+  //     'A simple and healthy tuna tartare recipe that will be sure to impress anyone!',
+  //     'https://choosingchia.com/jessh-jessh/uploads/2015/03/tunatarare.jpg',
+  //     [new Ingredient('Tuna', 1), new Ingredient('Avocado', 2)]
+  //   ),
+  //   new Recipe(
+  //     'Beef Steak',
+  //     'This grilled steak is flavorful, juicy, and tender. You won’t believe it’s not from an upscale',
+  //     'https://foremangrillrecipes.com/wp-content/uploads/2013/06/featured-Foreman-Grill-Beef-Steak.jpg',
+  //     [new Ingredient('Beef', 1), new Ingredient('French Fries', 25)]
+  //   )
+  // ];
+
+  private recipes: Recipe[] = [];
 
   constructor(private slService: ShoppingListService) {}
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
 
   getRecipes() {
     return this.recipes.slice();

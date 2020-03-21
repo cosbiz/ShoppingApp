@@ -13,6 +13,11 @@ export class RecipeEditComponent implements OnInit {
   editMode = false;
   recipeForm: FormGroup;
 
+  get ingredientsControls() {
+    // tslint:disable-next-line: no-string-literal
+    return (this.recipeForm.get('ingredients') as FormArray)['controls'];
+  }
+
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
